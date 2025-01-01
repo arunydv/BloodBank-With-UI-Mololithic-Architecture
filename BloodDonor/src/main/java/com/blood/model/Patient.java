@@ -12,19 +12,19 @@ public class Patient {
 	@Id
 	@Column(length = 10)
 	private String id;
-	@Column(length = 25)
+	@Column(length = 25,nullable = false)
 	private String name;
-	@Column(length = 2)
+	@Column(length = 2,nullable = false)
 	private String blood_group;
-	@Column
+	@Column(nullable = false)
 	private Date admission;
-	@Column
+	@Column(nullable = false)
 	private Date discharge;
 	@Column(nullable = false, columnDefinition = "INT(2)")
 	private int age;
-	@Column(length = 25)
+	@Column(length = 25,nullable = false)
 	private String address;
-	@Column
+	@Column(nullable = false)
 	private Date dob;
 	public String getId() {
 		return id;

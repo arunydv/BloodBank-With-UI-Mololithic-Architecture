@@ -10,9 +10,9 @@ public class Hospital {
 	@Id
 	@Column(length = 10)
 	private String Id;
-	@Column(length = 25)
+	@Column(length = 25,nullable = false)
 	private String name;
-	@Column(length = 25)
+	@Column(length = 25,nullable = false)
 	private String address;
 	public String getId() {
 		return Id;

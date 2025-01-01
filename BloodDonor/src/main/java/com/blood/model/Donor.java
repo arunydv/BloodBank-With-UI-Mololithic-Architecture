@@ -12,19 +12,19 @@ public class Donor {
 	@Id
 	@Column(length = 25)
 	private String donorId;
-	@Column(length = 100)
+	@Column(length = 100,nullable = false)
 	private String password;
-	@Column(length = 25)
+	@Column(length = 25,nullable = false)
 	private String firstname;
-	@Column(length = 25)
+	@Column(length = 25,nullable = false)
 	private String lastname;
-	@Column	
+	@Column(nullable = false)	
 	private Date dob;
-	@Column(length = 25)
+	@Column(length = 25,nullable = false)
 	private String address;
-	@Column
+	@Column(nullable = false)
 	private long contact;
-	@Column(length = 3)
+	@Column(length = 3,nullable = false)
 	private String blood;
 	public String getDonorId() {
 		return donorId;

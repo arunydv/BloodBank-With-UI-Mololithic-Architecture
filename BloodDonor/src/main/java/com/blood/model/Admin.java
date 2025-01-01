@@ -10,7 +10,7 @@ public class Admin {
 	@Id
 	@Column(length = 25)
 	private String id;
-	@Column(length = 100)
+	@Column(length = 100,nullable = false)
 	private String password;
 	public String getId() {
 		return id;
