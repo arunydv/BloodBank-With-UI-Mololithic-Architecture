@@ -33,4 +33,8 @@ public class Admin {
 	public String toString() {
 		return "Admin [id=" + id + ", password=" + password + "]";
 	}
+	public Admin() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 }

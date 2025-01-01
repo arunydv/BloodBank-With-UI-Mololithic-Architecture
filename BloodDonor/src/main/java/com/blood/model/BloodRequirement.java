@@ -22,4 +22,44 @@ public class BloodRequirement {
 	    private int patientage;
 	    @Column(length = 3,nullable = false)
 	    private int bloodgroup;
+		public String getHospitalId() {
+			return hospitalId;
+		}
+		public void setHospitalId(String hospitalId) {
+			this.hospitalId = hospitalId;
+		}
+		public String getPatientName() {
+			return patientName;
+		}
+		public void setPatientName(String patientName) {
+			this.patientName = patientName;
+		}
+		public int getPatientage() {
+			return patientage;
+		}
+		public void setPatientage(int patientage) {
+			this.patientage = patientage;
+		}
+		public int getBloodgroup() {
+			return bloodgroup;
+		}
+		public void setBloodgroup(int bloodgroup) {
+			this.bloodgroup = bloodgroup;
+		}
+		public BloodRequirement(String hospitalId, String patientName, int patientage, int bloodgroup) {
+			super();
+			this.hospitalId = hospitalId;
+			this.patientName = patientName;
+			this.patientage = patientage;
+			this.bloodgroup = bloodgroup;
+		}
+		@Override
+		public String toString() {
+			return "BloodRequirement [hospitalId=" + hospitalId + ", patientName=" + patientName + ", patientage="
+					+ patientage + ", bloodgroup=" + bloodgroup + "]";
+		}
+		public BloodRequirement() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
 }

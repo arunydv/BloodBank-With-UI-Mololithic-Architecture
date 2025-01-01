@@ -42,4 +42,8 @@ public class Hospital {
 	public String toString() {
 		return "Hospital [Id=" + Id + ", name=" + name + ", address=" + address + "]";
 	}
+	public Hospital() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 }
