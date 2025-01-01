@@ -91,4 +91,8 @@ public class Patient {
 		return "Patient [id=" + id + ", name=" + name + ", blood_group=" + blood_group + ", admission=" + admission
 				+ ", discharge=" + discharge + ", age=" + age + ", address=" + address + ", dob=" + dob + "]";
 	}
+	public Patient() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 }
