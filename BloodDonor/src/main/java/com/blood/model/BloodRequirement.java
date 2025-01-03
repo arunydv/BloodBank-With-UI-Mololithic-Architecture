@@ -3,30 +3,31 @@ package com.blood.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-
 
 @Entity
 public class BloodRequirement {
 	    @Id
-	    @Column(name = "hospital_id")
-	    private String hospitalId; // Primary key and foreign key
-
-	    @OneToOne(optional = false)
-	    @JoinColumn(name = "hospital_id", referencedColumnName = "id")
-	    private Hospital hospital;
+	    @Column(length = 10,nullable = false)
+	    private String hospitalId; 
+	    @Column(length = 10,nullable = false)
+	    private String name;
 	    @Column(length = 10,nullable = false)
 	    private String patientName;
 	    @Column(nullable = false, columnDefinition = "INT(2)")
 	    private int patientage;
 	    @Column(length = 3,nullable = false)
-	    private int bloodgroup;
+	    private String bloodgroup;
 		public String getHospitalId() {
 			return hospitalId;
 		}
 		public void setHospitalId(String hospitalId) {
 			this.hospitalId = hospitalId;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
 		}
 		public String getPatientName() {
 			return patientName;
@@ -40,23 +41,24 @@ public class BloodRequirement {
 		public void setPatientage(int patientage) {
 			this.patientage = patientage;
 		}
-		public int getBloodgroup() {
+		public String getBloodgroup() {
 			return bloodgroup;
 		}
-		public void setBloodgroup(int bloodgroup) {
+		public void setBloodgroup(String bloodgroup) {
 			this.bloodgroup = bloodgroup;
 		}
-		public BloodRequirement(String hospitalId, String patientName, int patientage, int bloodgroup) {
+		public BloodRequirement(String hospitalId, String name, String patientName, int patientage, String bloodgroup) {
 			super();
 			this.hospitalId = hospitalId;
+			this.name = name;
 			this.patientName = patientName;
 			this.patientage = patientage;
 			this.bloodgroup = bloodgroup;
 		}
 		@Override
 		public String toString() {
-			return "BloodRequirement [hospitalId=" + hospitalId + ", patientName=" + patientName + ", patientage="
-					+ patientage + ", bloodgroup=" + bloodgroup + "]";
+			return "BloodRequirement [hospitalId=" + hospitalId + ", name=" + name + ", patientName=" + patientName
+					+ ", patientage=" + patientage + ", bloodgroup=" + bloodgroup + "]";
 		}
 		public BloodRequirement() {
 			super();

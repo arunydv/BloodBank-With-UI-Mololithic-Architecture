@@ -15,7 +15,7 @@ import com.blood.service.DonorService;
 @RestController
 public class DonorController {
 
-	@Autowired(required=true)
+	@Autowired
 	private DonorService donorService;
 
 	@PostMapping("/register")

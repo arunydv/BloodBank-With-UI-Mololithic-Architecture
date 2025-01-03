@@ -14,13 +14,13 @@ import com.blood.repository.PatientRepository;
 @Service
 public class DonorService {
 
-	@Autowired(required = true)
+	@Autowired
 	private HospitalRepository hospitalRepo;
 	@Autowired
 	private PatientRepository patientRepo;
-	@Autowired(required = true)
+	@Autowired
 	private DonorRepository donorRepo;
-	@Autowired(required = true)
+	@Autowired
 	private PasswordEncoder passwordEncoder;
 
 	public Donor register(Donor donor) {

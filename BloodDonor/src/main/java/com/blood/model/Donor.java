@@ -35,11 +35,9 @@ public class Donor {
 	public void setDonorId(String donorId) {
 		this.donorId = donorId;
 	}
-	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
-	@JsonProperty
 	public void setPassword(String password) {
 		this.password = password;
 	}
