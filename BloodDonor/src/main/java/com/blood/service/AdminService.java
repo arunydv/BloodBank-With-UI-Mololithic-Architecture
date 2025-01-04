@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.blood.model.BloodRequirement;
+import com.blood.model.Hospital;
 import com.blood.repository.BloodRequirementRepo;
 import com.blood.repository.DonorRepository;
 import com.blood.repository.HospitalRepository;
@@ -20,8 +21,12 @@ public class AdminService {
 	private DonorRepository donorRepo;
 	@Autowired
 	private BloodRequirementRepo bloodRequirementRepo;
-	
+
 	public BloodRequirement saveBloodRequirement(BloodRequirement bloodRequirement) {
 		return bloodRequirementRepo.save(bloodRequirement);
+	}
+
+	public Hospital saveHospital(Hospital hospital) {
+		return hospitalRepo.save(hospital);
 	}
 }

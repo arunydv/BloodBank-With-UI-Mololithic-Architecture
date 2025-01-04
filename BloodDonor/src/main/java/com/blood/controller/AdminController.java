@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.blood.model.BloodRequirement;
 import com.blood.model.Donor;
+import com.blood.model.Hospital;
 import com.blood.service.AdminService;
 import com.blood.service.DonorService;
 
@@ -37,6 +38,12 @@ public class AdminController {
 	@PostMapping("/bloodrequirement")
 	public ResponseEntity<String> requirement(@RequestBody BloodRequirement bloodRequirement) {
 		adminService.saveBloodRequirement(bloodRequirement);
-		return new ResponseEntity<>("registered", HttpStatus.OK);
+		return new ResponseEntity<>("Registered", HttpStatus.OK);
+	}
+	
+	@PostMapping("/hospital")
+	public ResponseEntity<String> hospitaldetails(@RequestBody Hospital hospital) {
+		adminService.saveHospital(hospital);
+		return new ResponseEntity<>("Registered", HttpStatus.OK);
 	}
 }

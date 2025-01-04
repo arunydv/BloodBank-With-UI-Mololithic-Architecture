@@ -1,0 +1,59 @@
+package com.blood.model;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
+public class BloodDonation {
+
+	@Id
+	@Column(length = 10, nullable =false)
+	private String donorId;
+	@Column(length = 10, nullable =false)
+	private String pname;
+	@Column(length = 10, nullable =false)
+	private String hodpId;
+	@Column(length = 3, nullable =false)
+	private String bloodgrp;
+	public String getDonorId() {
+		return donorId;
+	}
+	public void setDonorId(String donorId) {
+		this.donorId = donorId;
+	}
+	public String getPname() {
+		return pname;
+	}
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
+	public String getHodpId() {
+		return hodpId;
+	}
+	public void setHodpId(String hodpId) {
+		this.hodpId = hodpId;
+	}
+	public String getBloodgrp() {
+		return bloodgrp;
+	}
+	public void setBloodgrp(String bloodgrp) {
+		this.bloodgrp = bloodgrp;
+	}
+	public BloodDonation() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public BloodDonation(String donorId, String pname, String hodpId, String bloodgrp) {
+		super();
+		this.donorId = donorId;
+		this.pname = pname;
+		this.hodpId = hodpId;
+		this.bloodgrp = bloodgrp;
+	}
+	@Override
+	public String toString() {
+		return "BloodDonation [donorId=" + donorId + ", pname=" + pname + ", hodpId=" + hodpId + ", bloodgrp="
+				+ bloodgrp + "]";
+	}
+}
