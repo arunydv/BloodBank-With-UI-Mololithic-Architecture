@@ -14,7 +14,6 @@ import com.blood.repository.DonorRepository;
 import com.blood.repository.HospitalRepository;
 import com.blood.repository.PatientRepository;
 
-import jakarta.transaction.Transactional;
 
 @Service
 public class AdminService {
@@ -32,7 +31,6 @@ public class AdminService {
 		return bloodRequirementRepo.save(bloodRequirement);
 	}
      
-	@Transactional
 	public Hospital saveHospital(Hospital hospital) {
 		return hospitalRepo.save(hospital);
 	}
