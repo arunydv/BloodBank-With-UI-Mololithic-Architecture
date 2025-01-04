@@ -29,6 +29,6 @@ public class DonorService {
 	}
 	
 	 public List<Donor> getDonorsByBloodGroup(String bloodGroup) {
-	        return donorRepo.findByBlood(bloodGroup);
+	        return donorRepo.findByBloodWithoutPassword(bloodGroup);
 	}
  }
