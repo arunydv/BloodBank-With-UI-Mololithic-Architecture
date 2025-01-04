@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.blood.model.BloodRequirement;
 import com.blood.model.Donor;
 import com.blood.model.Hospital;
+import com.blood.model.Patient;
 import com.blood.service.AdminService;
 import com.blood.service.DonorService;
 
@@ -45,5 +46,12 @@ public class AdminController {
 	public ResponseEntity<String> hospitaldetails(@RequestBody Hospital hospital) {
 		adminService.saveHospital(hospital);
 		return new ResponseEntity<>("Registered", HttpStatus.OK);
+	}
+	
+
+	@PostMapping("/patient")
+	public ResponseEntity<String> patinet(@RequestBody Patient patient) {
+		adminService.addPatient(patient);
+		return new ResponseEntity<>("Added", HttpStatus.OK);
 	}
 }

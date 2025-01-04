@@ -12,17 +12,17 @@ public class Patient {
 	@Id
 	@Column(length = 10)
 	private String id;
-	@Column(length = 25,nullable = false)
+	@Column(length = 10,nullable = false)
 	private String name;
-	@Column(length = 2,nullable = false)
-	private String blood_group;
+	@Column(length = 3,nullable = false)
+	private String bloodgroup;
 	@Column(nullable = false)
 	private Date admission;
 	@Column(nullable = false)
 	private Date discharge;
 	@Column(nullable = false, columnDefinition = "INT(2)")
 	private int age;
-	@Column(length = 25,nullable = false)
+	@Column(length = 10,nullable = false)
 	private String address;
 	@Column(nullable = false)
 	private Date dob;
@@ -38,11 +38,11 @@ public class Patient {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getBlood_group() {
-		return blood_group;
+	public String getBloodgroup() {
+		return bloodgroup;
 	}
-	public void setBlood_group(String blood_group) {
-		this.blood_group = blood_group;
+	public void setBloodgroup(String bloodgroup) {
+		this.bloodgroup = bloodgroup;
 	}
 	public Date getAdmission() {
 		return admission;
@@ -74,12 +74,16 @@ public class Patient {
 	public void setDob(Date dob) {
 		this.dob = dob;
 	}
-	public Patient(String id, String name, String blood_group, Date admission, Date discharge, int age, String address,
+	public Patient() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Patient(String id, String name, String bloodgroup, Date admission, Date discharge, int age, String address,
 			Date dob) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.blood_group = blood_group;
+		this.bloodgroup = bloodgroup;
 		this.admission = admission;
 		this.discharge = discharge;
 		this.age = age;
@@ -88,11 +92,7 @@ public class Patient {
 	}
 	@Override
 	public String toString() {
-		return "Patient [id=" + id + ", name=" + name + ", blood_group=" + blood_group + ", admission=" + admission
+		return "Patient [id=" + id + ", name=" + name + ", bloodgroup=" + bloodgroup + ", admission=" + admission
 				+ ", discharge=" + discharge + ", age=" + age + ", address=" + address + ", dob=" + dob + "]";
-	}
-	public Patient() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 }

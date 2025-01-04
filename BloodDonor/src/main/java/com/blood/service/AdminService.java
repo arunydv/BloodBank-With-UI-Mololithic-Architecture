@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.blood.model.BloodRequirement;
 import com.blood.model.Hospital;
+import com.blood.model.Patient;
 import com.blood.repository.BloodRequirementRepo;
 import com.blood.repository.DonorRepository;
 import com.blood.repository.HospitalRepository;
@@ -28,5 +29,9 @@ public class AdminService {
 
 	public Hospital saveHospital(Hospital hospital) {
 		return hospitalRepo.save(hospital);
+	}
+	
+	public Patient addPatient(Patient patient) {
+		return patientRepo.save(patient);
 	}
 }
