@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.blood.model.Donor;
+import com.blood.model.Hospital;
 import com.blood.model.Patient;
 import com.blood.repository.DonorRepository;
 import com.blood.repository.HospitalRepository;
@@ -30,5 +31,9 @@ public class DonorService {
 
 	public List<Patient> getPatientsByBloodGroup(String bloodGroup) {
 		return patientRepo.findByBloodGroup(bloodGroup);
+	}
+	
+	public List<Hospital> gethospital(String address) {
+		return hospitalRepo.findByAddress(address);
 	}
 }

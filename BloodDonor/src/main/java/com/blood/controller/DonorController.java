@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.blood.model.Donor;
+import com.blood.model.Hospital;
 import com.blood.model.Patient;
 import com.blood.service.DonorService;
 
@@ -32,4 +33,9 @@ public class DonorController {
     public List<Patient> listPatientsByBloodGroup(@PathVariable String bloodGroup) {
         return donorService.getPatientsByBloodGroup(bloodGroup);
     }
+	
+	@GetMapping("/hospital/{address}")
+	public List<Hospital> getDonorsByBloodGroup(@PathVariable String address) {
+		return donorService.gethospital(address);
+	}
 }
