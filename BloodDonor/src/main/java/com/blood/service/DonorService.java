@@ -1,10 +1,12 @@
 package com.blood.service;
 
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.blood.model.Donor;
+import com.blood.model.Patient;
 import com.blood.repository.DonorRepository;
 import com.blood.repository.HospitalRepository;
 import com.blood.repository.PatientRepository;
@@ -24,5 +26,9 @@ public class DonorService {
 	public Donor register(Donor donor) {
 		donor.setPassword(passwordEncoder.encode(donor.getPassword()));
 		return donorRepo.save(donor);
+	}
+
+	public List<Patient> getPatientsByBloodGroup(String bloodGroup) {
+		return patientRepo.findByBloodGroup(bloodGroup);
 	}
 }
