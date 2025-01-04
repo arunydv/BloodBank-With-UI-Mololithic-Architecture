@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.blood.model.Admin;
 import com.blood.model.BloodRequirement;
 import com.blood.model.Donor;
 import com.blood.model.Hospital;
@@ -23,9 +24,14 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 
-	@GetMapping("/")
-	public String home() {
-		return "index";
+	@PostMapping("/adminlogin")
+	public ResponseEntity<String> login(@RequestBody Admin admin) {
+		boolean valid = adminService.validateAdmin(admin);
+		if (valid) {
+			return ResponseEntity.ok("Login successful!");
+		} else {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid ID or password!");
+		}
 	}
 
 	@GetMapping("/donors/{bloodGroup}")
@@ -38,22 +44,22 @@ public class AdminController {
 		adminService.saveBloodRequirement(bloodRequirement);
 		return new ResponseEntity<>("Registered", HttpStatus.OK);
 	}
-	
+
 	@PostMapping("/hospital")
 	public ResponseEntity<String> hospitaldetails(@RequestBody Hospital hospital) {
 		adminService.saveHospital(hospital);
 		return new ResponseEntity<>("Registered", HttpStatus.OK);
 	}
-	
 
 	@PostMapping("/patient")
 	public ResponseEntity<String> patinet(@RequestBody Patient patient) {
 		adminService.addPatient(patient);
 		return new ResponseEntity<>("Added", HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/donors")
 	public List<Donor> listDonorsWithoutPassword() {
-        return adminService.getDonorsWithoutPassword();
-    }
+		return adminService.getDonorsWithoutPassword();
+	}
+
 }
