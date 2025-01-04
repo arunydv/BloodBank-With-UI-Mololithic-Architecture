@@ -16,13 +16,10 @@ import com.blood.model.Donor;
 import com.blood.model.Hospital;
 import com.blood.model.Patient;
 import com.blood.service.AdminService;
-import com.blood.service.DonorService;
 
 @RestController
 public class AdminController {
 
-	@Autowired
-	private DonorService donorService;
 	@Autowired
 	private AdminService adminService;
 
@@ -33,7 +30,7 @@ public class AdminController {
 
 	@GetMapping("/donors/{bloodGroup}")
 	public List<Donor> getDonorsByBloodGroup(@PathVariable String bloodGroup) {
-		return donorService.getDonorsByBloodGroup(bloodGroup);
+		return adminService.getDonorsByBloodGroup(bloodGroup);
 	}
 
 	@PostMapping("/bloodrequirement")
@@ -54,4 +51,9 @@ public class AdminController {
 		adminService.addPatient(patient);
 		return new ResponseEntity<>("Added", HttpStatus.OK);
 	}
+	
+	@GetMapping("/donors")
+	public List<Donor> listDonorsWithoutPassword() {
+        return adminService.getDonorsWithoutPassword();
+    }
 }

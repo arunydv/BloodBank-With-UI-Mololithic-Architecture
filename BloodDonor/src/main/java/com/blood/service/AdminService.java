@@ -1,9 +1,12 @@
 package com.blood.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.blood.model.BloodRequirement;
+import com.blood.model.Donor;
 import com.blood.model.Hospital;
 import com.blood.model.Patient;
 import com.blood.repository.BloodRequirementRepo;
@@ -33,5 +36,14 @@ public class AdminService {
 	
 	public Patient addPatient(Patient patient) {
 		return patientRepo.save(patient);
+	}
+	
+	public List<Donor> getDonorsByBloodGroup(String bloodGroup) {
+		return donorRepo.findByBloodWithoutPassword(bloodGroup);
+	}
+	
+
+	public List<Donor> getDonorsWithoutPassword() {
+		return donorRepo.findAllDonorsWithoutPassword();
 	}
 }

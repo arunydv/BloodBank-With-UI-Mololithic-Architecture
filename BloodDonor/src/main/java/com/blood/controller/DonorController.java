@@ -21,7 +21,7 @@ public class DonorController {
 	@PostMapping("/register")
 	public ResponseEntity<String> registration(@RequestBody Donor donor){
 		donorService.register(donor);
-		return  new ResponseEntity<>("registered",HttpStatus.OK);
+		return  new ResponseEntity<>("Registered",HttpStatus.OK);
 			
 	}
 }
