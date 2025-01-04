@@ -45,4 +45,14 @@ public class DonorController {
 		donorService.registerdonation(bloodonation);
 		return new ResponseEntity<>("Registered", HttpStatus.OK);
 	}
+	
+	@PostMapping("/donorlogin")
+	public ResponseEntity<String> donorlogin(@RequestBody Donor donor) {
+		boolean valid = donorService.validateDonor(donor);
+		if (valid) {
+			return ResponseEntity.ok("Login successful!");
+		} else {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid ID or password!");
+		}
+	}
 }

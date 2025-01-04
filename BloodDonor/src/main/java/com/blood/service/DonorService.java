@@ -45,4 +45,14 @@ public class DonorService {
 	public BloodDonation registerdonation(BloodDonation bloodonation) {
 		return bloodrepo.save(bloodonation);
 	}
+	
+	public boolean validateDonor(Donor donor) {
+		Donor donor1 = donorRepo.findById(donor.getDonorId()).orElse(null);
+		if (donor1 != null && donor1.getDonorId().equals(donor.getDonorId())
+				&& passwordEncoder.matches(donor.getPassword(), donor1.getPassword())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
