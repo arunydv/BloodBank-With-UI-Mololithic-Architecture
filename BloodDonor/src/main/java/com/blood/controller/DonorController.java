@@ -29,15 +29,10 @@ public class DonorController {
 
 	@PostMapping("/register")
 	public ResponseEntity<Map<String, String>> registration(@RequestBody Donor donor) {
-		// Register the donor (this part is assumed to be in your service)
 		donorService.register(donor);
-
-		// Create a response map
 		Map<String, String> response = new HashMap<>();
 		response.put("status", "success");
 		response.put("message", "Registration successful!");
-
-		// Return the response as JSON with HTTP status OK
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
@@ -60,14 +55,11 @@ public class DonorController {
 	@PostMapping("/donorlogin")
 	public ResponseEntity<Map<String, String>> donorlogin(@RequestBody Donor donor) {
 		boolean valid = donorService.validateDonor(donor);
-
 		Map<String, String> response = new HashMap<>();
-
 		if (valid) {
 			response.put("status", "success");
 			response.put("message", "Login successful!");
-			// Optionally, include a redirect URL if required
-			response.put("redirect", "/"); // Modify with actual redirection URL if needed
+			response.put("redirect", "/"); 
 			return ResponseEntity.ok(response);
 		} else {
 			response.put("status", "error");

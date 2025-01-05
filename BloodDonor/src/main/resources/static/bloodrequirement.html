@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Blood Requirement</title>
+<style>
+/* Styling the page */
+body {
+	font-family: Arial, sans-serif;
+	background-image: url('image2.avif');
+	background-size: cover;
+	background-position: center;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.container {
+	background-color: rgba(255, 255, 255, 0.8);
+	padding: 2rem;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	width: 100%;
+	max-width: 500px;
+	text-align: center;
+}
+
+h1 {
+	color: #e74c3c;
+}
+
+label {
+	display: block;
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+
+input, select {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 1rem;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+button {
+	width: 100%;
+	padding: 10px;
+	background-color: #e74c3c;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+button:hover {
+	background-color: #c0392b;
+}
+
+.message {
+	padding: 10px;
+	margin-top: 20px;
+	border-radius: 5px;
+	text-align: center;
+}
+
+.success {
+	background-color: #d4edda;
+	color: #155724;
+	border: 1px solid #c3e6cb;
+}
+
+.error {
+	background-color: #f8d7da;
+	color: #721c24;
+	border: 1px solid #f5c6cb;
+}
+</style>
+</head>
+<body>
+
+	<div class="container">
+		<h1>Add Blood Requirement</h1>
+
+		<!-- Blood Requirement Form -->
+		<form id="bloodRequirementForm">
+			<label for="hospitalId">Hospital ID:</label> <input type="text"
+				id="hospitalId" name="hospitalId" required> <label
+				for="name">Hospital Name:</label> <input type="text" id="name"
+				name="name" required> <label for="patientName">Patient
+				Name:</label> <input type="text" id="patientName" name="patientName"
+				required> <label for="patientAge">Patient Age:</label> <input
+				type="number" id="patientage" name="patientage" required> <label
+				for="bloodGroup">Blood Group:</label> <select id="bloodgroup"
+				name="bloodgroup" required>
+				<option value="A+">A+</option>
+				<option value="A-">A-</option>
+				<option value="B+">B+</option>
+				<option value="B-">B-</option>
+				<option value="O+">O+</option>
+				<option value="O-">O-</option>
+				<option value="AB+">AB+</option>
+				<option value="AB-">AB-</option>
+			</select>
+
+			<button type="submit">Submit Requirement</button>
+		</form>
+
+		<!-- Message Display -->
+		<div id="messageBox" class="message"></div>
+	</div>
+
+	<script>
+        // Function to show messages (success or error)
+        function showMessage(message, isError = false) {
+            const messageBox = document.getElementById('messageBox');
+            messageBox.textContent = message;
+            messageBox.className = `message ${isError ? 'error' : 'success'}`;
+            messageBox.style.display = 'block';
+        }
+
+        // Handle Form Submission
+        document.getElementById('bloodRequirementForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent default form submission behavior
+
+            // Collect form data
+            const formData = new FormData(event.target);
+            const bloodRequirementData = Object.fromEntries(formData);
+
+            try {
+                const response = await fetch('/bloodrequirement', {  // Post to the API endpoint
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(bloodRequirementData)
+                });
+
+                const data = await response.json(); // Parse response as JSON
+
+                if (response.ok && data.status === 'Registered') {
+                    showMessage('Blood requirement successfully registered!', false);
+
+                    // Redirect after 2 seconds
+                    setTimeout(function() {
+                        window.location.href = '/admindashboard.html';  // Redirect to admin dashboard or another page
+                    }, 2000);
+                } else {
+                    showMessage(data.message || 'Registration failed!', true);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showMessage('An error occurred. Please try again.', true);
+            }
+
+        });
+    </script>
+
+</body>
+</html>

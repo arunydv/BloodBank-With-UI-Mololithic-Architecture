@@ -29,20 +29,19 @@ public class AdminController {
 
 	@PostMapping("/adminlogin")
 	public ResponseEntity<Map<String, Object>> login(@RequestBody Admin admin) {
-	    Map<String, Object> response = new HashMap<>();
+		Map<String, Object> response = new HashMap<>();
 
-	    boolean valid = adminService.validateAdmin(admin);
-	    if (valid) {
-	        response.put("status", "success");
-	        response.put("message", "Login successful!");
-	        // Optionally, you can add a redirect URL here if you want the frontend to redirect after login
-	        response.put("redirect", "admindashboard.html"); // Replace with the actual dashboard URL
-	        return ResponseEntity.ok(response);
-	    } else {
-	        response.put("status", "error");
-	        response.put("message", "Invalid ID or password!");
-	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
-	    }
+		boolean valid = adminService.validateAdmin(admin);
+		if (valid) {
+			response.put("status", "success");
+			response.put("message", "Login successful!");
+			response.put("redirect", "admindashboard.html"); 
+			return ResponseEntity.ok(response);
+		} else {
+			response.put("status", "error");
+			response.put("message", "Invalid ID or password!");
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+		}
 	}
 
 	@GetMapping("/donors/{bloodGroup}")
@@ -51,9 +50,19 @@ public class AdminController {
 	}
 
 	@PostMapping("/bloodrequirement")
-	public ResponseEntity<String> requirement(@RequestBody BloodRequirement bloodRequirement) {
-		adminService.saveBloodRequirement(bloodRequirement);
-		return new ResponseEntity<>("Registered", HttpStatus.OK);
+	public ResponseEntity<Map<String, String>> requirement(@RequestBody BloodRequirement bloodRequirement) {
+		Map<String, String> response = new HashMap<>();
+
+		try {
+			adminService.saveBloodRequirement(bloodRequirement);
+			response.put("status", "Registered");
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.put("status", "error");
+			response.put("message", "An error occurred. Please try again.");
+			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	@PostMapping("/hospital")
