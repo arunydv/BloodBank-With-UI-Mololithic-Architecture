@@ -1,11 +1,14 @@
 package com.blood.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +21,7 @@ import com.blood.model.Hospital;
 import com.blood.model.Patient;
 import com.blood.service.DonorService;
 
-@RestController
+@Controller
 public class DonorController {
 
 	@Autowired
@@ -45,14 +48,24 @@ public class DonorController {
 		donorService.registerdonation(bloodonation);
 		return new ResponseEntity<>("Registered", HttpStatus.OK);
 	}
-	
+
 	@PostMapping("/donorlogin")
-	public ResponseEntity<String> donorlogin(@RequestBody Donor donor) {
+	public ResponseEntity<Map<String, String>> donorlogin(@RequestBody Donor donor) {
 		boolean valid = donorService.validateDonor(donor);
+
+		Map<String, String> response = new HashMap<>();
+
 		if (valid) {
-			return ResponseEntity.ok("Login successful!");
+			response.put("status", "success");
+			response.put("message", "Login successful!");
+			// Optionally, include a redirect URL if required
+			response.put("redirect", "/"); // Modify with actual redirection URL if needed
+			return ResponseEntity.ok(response);
 		} else {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid ID or password!");
+			response.put("status", "error");
+			response.put("message", "Invalid ID or password!");
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
 		}
 	}
+
 }
