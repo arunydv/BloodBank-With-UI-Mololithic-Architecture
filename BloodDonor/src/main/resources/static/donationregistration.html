@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            background-image: url('image2.avif');
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 500px;
+            margin-top: 20px;
+        }
+
+        h1 {
+            color: #e74c3c;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            background-color: #c0392b;
+        }
+
+        .back-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+        .back-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .message {
+            text-align: center;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Donor Registration</h1>
+
+        <form id="donorForm">
+            <div class="form-group">
+                <label for="donorId">Donor ID:</label>
+                <input type="text" id="donorId" name="donorId" required>
+            </div>
+            <div class="form-group">
+                <label for="pname">Patient Name:</label>
+                <input type="text" id="pname" name="pname" required>
+            </div>
+            <div class="form-group">
+                <label for="hospId">Hospital ID:</label>
+                <input type="text" id="hospId" name="hospId" required>
+            </div>
+            <div class="form-group">
+                <label for="bloodgrp">Blood Group:</label>
+                <select id="bloodgrp" name="bloodgrp" required>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                </select>
+            </div>
+
+            <button type="submit">Register</button>
+        </form>
+
+        <button class="back-btn" onclick="window.location.href='donordashboard.html'">Back to Dashboard</button>
+
+        <div id="message" class="message"></div>
+    </div>
+
+    <script>
+        // Display message
+        function showMessage(message, isError) {
+            const messageDiv = document.getElementById("message");
+            messageDiv.textContent = message;
+            messageDiv.classList.remove("error", "success");
+            messageDiv.classList.add(isError ? "error" : "success");
+        }
+
+     // Handle form submission
+        document.getElementById("donorForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const donorData = {
+                donorId: document.getElementById("donorId").value,
+                pname: document.getElementById("pname").value,
+                hospId: document.getElementById("hospId").value,
+                bloodgrp: document.getElementById("bloodgrp").value
+            };
+
+            // Send data to the /donation API endpoint
+            fetch('/donation', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(donorData),
+            })
+            .then(async (response) => {
+                // Ensure the response is OK (200 OK)
+                if (response.ok) {
+                    const data = await response.text(); // Use text() instead of json() since the response is plain text
+
+                    // Check if the response text is "Registered"
+                    if (data === 'Registered') {
+                        showMessage('Donor successfully registered!', false);
+
+                        // Redirect to donor dashboard after 2 seconds
+                        setTimeout(function() {
+                            window.location.href = 'donordashboard.html'; // Redirect to donor dashboard
+                        }, 2000);
+                    } else {
+                        showMessage('Registration failed. Please try again.', true);
+                    }
+                } else {
+                    showMessage('Failed to register donor. Server returned an error.', true);
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                showMessage('An error occurred. Please try again.', true);
+            });
+        });
+
+    </script>
+</body>
+</html>

@@ -17,7 +17,6 @@
             flex-direction: column;
             align-items: center;
         }
-
         .container {
             background-color: rgba(255, 255, 255, 0.9);
             padding: 2rem;
@@ -83,15 +82,53 @@
         .button-container {
             margin-bottom: 2rem;
         }
+
+        /* Header with Logout button and Logo */
+        .header {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .header button {
+            padding: 5px 10px;
+            font-size: 14px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .header button:hover {
+            background-color: #c0392b;
+        }
     </style>
 </head>
 <body>
+
+    <!-- Header Section with Logout Button and Logo -->
+    <div class="header">
+        <img src="logout.jpg" alt="Logo" title="Logo">
+        <button onclick="logout()">Logout</button>
+    </div>
+
     <div class="container">
         <h1>Donor Dashboard</h1>
 
         <!-- Register for Blood Donation Button -->
         <div class="button-container">
-            <button onclick="window.location.href='/donorregistration.html'">Register for Blood Donation</button>
+            <button onclick="window.location.href='/donationregistration.html'">Register for Blood Donation</button>
         </div>
 
         <!-- Blood Group Dropdown and Button -->
@@ -119,6 +156,11 @@
     </div>
 
     <script>
+        // Function to logout and redirect to the index page
+        function logout() {
+            window.location.href = '/index.html';
+        }
+
         // Function to view patients by blood group
         async function viewPatientsByBloodGroup() {
             const bloodGroup = document.getElementById("bloodGroup").value;

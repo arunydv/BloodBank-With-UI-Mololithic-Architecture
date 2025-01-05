@@ -13,7 +13,7 @@ public class BloodDonation {
 	@Column(length = 10, nullable =false)
 	private String pname;
 	@Column(length = 10, nullable =false)
-	private String hodpId;
+	private String hospId;
 	@Column(length = 3, nullable =false)
 	private String bloodgrp;
 	public String getDonorId() {
@@ -28,11 +28,11 @@ public class BloodDonation {
 	public void setPname(String pname) {
 		this.pname = pname;
 	}
-	public String getHodpId() {
-		return hodpId;
+	public String getHospId() {
+		return hospId;
 	}
-	public void setHodpId(String hodpId) {
-		this.hodpId = hodpId;
+	public void setHospId(String hospId) {
+		this.hospId = hospId;
 	}
 	public String getBloodgrp() {
 		return bloodgrp;
@@ -44,16 +44,16 @@ public class BloodDonation {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public BloodDonation(String donorId, String pname, String hodpId, String bloodgrp) {
+	public BloodDonation(String donorId, String pname, String hospId, String bloodgrp) {
 		super();
 		this.donorId = donorId;
 		this.pname = pname;
-		this.hodpId = hodpId;
+		this.hospId = hospId;
 		this.bloodgrp = bloodgrp;
 	}
 	@Override
 	public String toString() {
-		return "BloodDonation [donorId=" + donorId + ", pname=" + pname + ", hodpId=" + hodpId + ", bloodgrp="
+		return "BloodDonation [donorId=" + donorId + ", pname=" + pname + ", hospId=" + hospId + ", bloodgrp="
 				+ bloodgrp + "]";
 	}
 }
