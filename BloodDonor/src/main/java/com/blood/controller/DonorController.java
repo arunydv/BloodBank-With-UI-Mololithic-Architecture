@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.blood.model.BloodDonation;
 import com.blood.model.Donor;
@@ -28,9 +27,17 @@ public class DonorController {
 	private DonorService donorService;
 
 	@PostMapping("/register")
-	public ResponseEntity<String> registration(@RequestBody Donor donor) {
+	public ResponseEntity<Map<String, String>> registration(@RequestBody Donor donor) {
+		// Register the donor (this part is assumed to be in your service)
 		donorService.register(donor);
-		return new ResponseEntity<>("Registered", HttpStatus.OK);
+
+		// Create a response map
+		Map<String, String> response = new HashMap<>();
+		response.put("status", "success");
+		response.put("message", "Registration successful!");
+
+		// Return the response as JSON with HTTP status OK
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	@GetMapping("/patients/{bloodGroup}")
