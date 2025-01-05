@@ -63,7 +63,7 @@
         <!-- Buttons to route to different pages -->
         <button onclick="window.location.href='/bloodrequirement.html'">Add Blood Requirement</button>
         <button onclick="window.location.href='/hospitalregistration.html'">Add Hospital</button>
-        <button onclick="window.location.href='/add-patient'">Add Patient</button>
+        <button onclick="window.location.href='/patientregistration.html'">Add Patient</button>
 
         <!-- Dropdown for blood group selection -->
         <div class="dropdown-container">
@@ -87,7 +87,7 @@
         // Function to handle "View Donors" button click and pass blood group to the API via GET
         function viewDonors() {
             const bloodGroup = document.getElementById('bloodGroup').value;
-            const apiUrl = `/view-donors/${bloodGroup}`;
+            const apiUrl = `/donors/${bloodGroup}`;
 
             // Fetch data from API with selected blood group
             fetch(apiUrl)

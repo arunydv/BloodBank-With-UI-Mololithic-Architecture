@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Patient</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('image2.avif');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #e74c3c;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #d62b2b;
+        }
+
+        .message {
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Add Patient</h1>
+
+        <!-- Patient Registration Form -->
+        <form id="addPatientForm">
+            <label for="id">Patient ID:</label>
+            <input type="text" id="id" name="id" required>
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="bloodgroup">Blood Group:</label>
+            <select id="bloodgroup" name="bloodgroup" required>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+            </select>
+
+            <label for="admission">Admission Date:</label>
+            <input type="date" id="admission" name="admission" required>
+
+            <label for="discharge">Discharge Date:</label>
+            <input type="date" id="discharge" name="discharge" required>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required>
+
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" required>
+
+            <button type="submit">Register Patient</button>
+        </form>
+
+        <!-- Message Display -->
+        <div id="messageBox" class="message"></div>
+    </div>
+
+    <script>
+        // Function to show messages (success or error)
+        function showMessage(message, isError = false) {
+            const messageBox = document.getElementById('messageBox');
+            messageBox.textContent = message;
+            messageBox.className = `message ${isError ? 'error' : 'success'}`;
+            messageBox.style.display = 'block';
+        }
+
+        // Handle Form Submission
+        document.getElementById('addPatientForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent default form submission behavior
+
+            // Collect form data
+            const formData = new FormData(event.target);
+            const patientData = Object.fromEntries(formData);
+
+            try {
+                const response = await fetch('/patient', { // Replace with your API endpoint
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(patientData)
+                });
+
+                const data = await response.text(); // Use `.text()` because backend sends plain text response
+
+                if (response.ok && data === 'Registered') {
+                    showMessage('Patient successfully registered!', false);
+
+                    // Redirect after 2 seconds
+                    setTimeout(function() {
+                        window.location.href = '/admindashboard.html'; // Redirect to admin dashboard
+                    }, 2000);
+                } else {
+                    showMessage('Registration failed!', true);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showMessage('An error occurred. Please try again.', true);
+            }
+        });
+    </script>
+
+</body>
+</html>

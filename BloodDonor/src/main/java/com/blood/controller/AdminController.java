@@ -74,7 +74,7 @@ public class AdminController {
 	@PostMapping("/patient")
 	public ResponseEntity<String> patinet(@RequestBody Patient patient) {
 		adminService.addPatient(patient);
-		return new ResponseEntity<>("Added", HttpStatus.OK);
+		return new ResponseEntity<>("Registered", HttpStatus.OK);
 	}
 
 	@GetMapping("/donors")

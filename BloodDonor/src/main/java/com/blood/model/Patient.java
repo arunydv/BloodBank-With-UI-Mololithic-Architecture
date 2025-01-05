@@ -22,7 +22,7 @@ public class Patient {
 	private Date discharge;
 	@Column(nullable = false, columnDefinition = "INT(2)")
 	private int age;
-	@Column(length = 10,nullable = false)
+	@Column(length = 25,nullable = false)
 	private String address;
 	@Column(nullable = false)
 	private Date dob;
