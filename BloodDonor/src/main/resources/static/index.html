@@ -208,7 +208,7 @@
                     console.log('Login successful. Redirecting...');
                     setTimeout(() => {
                         window.location.href = data.redirect || '/index.html';
-                    }, 1000); // Redirect after 3 seconds
+                    }, 0); // Redirect after 3 seconds
                 } else {
                     showMessage(data.message || 'Login failed!', true);
                     console.error('Login failed with message:', data.message);
