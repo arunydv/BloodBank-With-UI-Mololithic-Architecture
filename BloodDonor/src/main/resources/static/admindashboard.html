@@ -5,32 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <style>
-        /* Global reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
             font-family: Arial, sans-serif;
-            background-image: url('image2.avif'); /* Add the background image here */
-            background-size: cover; /* Ensure the background image covers the entire body */
-            background-position: center; /* Center the background image */
+            background-image: url('image2.avif');
+            background-size: cover;
+            background-position: center;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            position: relative;
         }
 
         .container {
-            background-color: rgba(255, 255, 255, 0.8); /* Light transparent background to make text readable */
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 500%;
-            max-width: 500px;
             text-align: center;
+            width: 500px;
         }
 
         button, select {
@@ -41,69 +34,103 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
-            background-color: #e74c3c; /* Set button background color */
-            color: white; /* Set button text color to white */
+            background-color: #e74c3c;
+            color: white;
         }
 
         button:hover {
-            background-color: #c0392b; /* Darken the button on hover */
+            background-color: #c0392b;
         }
 
-        .dropdown-container {
-            position: relative;
+        .header {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
+        .header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .header button {
+            padding: 5px 10px;
+            font-size: 14px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .header button:hover {
+            background-color: #c0392b;
+        }
     </style>
 </head>
 <body>
+    <!-- Header Section with Logout Button and Logo -->
+    <div class="header">
+        <img src="logout.jpg" alt="Logo" title="Logo">
+        <button onclick="logout()">Logout</button>
+    </div>
 
     <div class="container">
         <h1>Admin Dashboard</h1>
-
-        <!-- Buttons to route to different pages -->
         <button onclick="window.location.href='/bloodrequirement.html'">Add Blood Requirement</button>
         <button onclick="window.location.href='/hospitalregistration.html'">Add Hospital</button>
         <button onclick="window.location.href='/patientregistration.html'">Add Patient</button>
-
-        <!-- Dropdown for blood group selection -->
-        <div class="dropdown-container">
-            <label for="bloodGroup">Donor By Blood Group</label>
-            <select id="bloodGroup">
-                <option value="A+">A+</option>
-                <option value="A-">A-</option>
-                <option value="B+">B+</option>
-                <option value="B-">B-</option>
-                <option value="O+">O+</option>
-                <option value="O-">O-</option>
-                <option value="AB+">AB+</option>
-                <option value="AB-">AB-</option>
-            </select>
-            <button onclick="viewDonors()">View Donors</button>
-        </div>
-
+        <button onclick="viewDonors()">View All Donors</button>
+        <select id="bloodGroup">
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+        </select>
+        <button onclick="viewDonorsByBloodGroup()">View Donors by Blood Group</button>
     </div>
 
     <script>
-        // Function to handle "View Donors" button click and pass blood group to the API via GET
-        function viewDonors() {
-            const bloodGroup = document.getElementById('bloodGroup').value;
-            const apiUrl = `/donors/${bloodGroup}`;
+        // Function to logout and redirect to the index page
+        function logout() {
+            window.location.href = '/index.html';
+        }
 
-            // Fetch data from API with selected blood group
-            fetch(apiUrl)
-                .then(response => response.json())
-                .then(data => {
-                    // Handle the response, e.g., displaying the list of donors
-                    console.log(data);
-                    // You can redirect to a new page if needed or display data in the current page
-                    alert('Donors fetched successfully.');
-                })
-                .catch(error => {
-                    console.error('Error fetching donors:', error);
-                    alert('Error fetching donors.');
-                });
+        // Function to view all donors
+        async function viewDonors() {
+            try {
+                const response = await fetch('/donors');
+                const data = await response.json();
+                sessionStorage.setItem('donorData', JSON.stringify(data));
+                window.location.href = '/donorlist.html';
+            } catch (error) {
+                console.error('Error fetching donors:', error);
+                alert('Failed to fetch donors. Please try again.');
+            }
+        }
+
+        // Function to view donors by blood group
+        async function viewDonorsByBloodGroup() {
+            const bloodGroup = document.getElementById('bloodGroup').value;
+            try {
+                const response = await fetch(`/donors/${bloodGroup}`);
+                const data = await response.json();
+                sessionStorage.setItem('donorData', JSON.stringify(data));
+                window.location.href = '/donorlist.html';
+            } catch (error) {
+                console.error('Error fetching donors by blood group:', error);
+                alert('Failed to fetch donors by blood group. Please try again.');
+            }
         }
     </script>
-
 </body>
 </html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('image2.avif');
+            background-size: cover;
+            background-position: center;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 800px;
+            margin: auto;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        button {
+            display: block;
+            text-align: center;
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Donor List</h1>
+        <table id="donorTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Blood Group</th>
+                    <th>Date of Birth</th>
+                    <th>Address</th>
+                    <th>Contact</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be dynamically added here -->
+            </tbody>
+        </table>
+        <button onclick="window.location.href='/admindashboard.html'">Back to Dashboard</button>
+    </div>
+
+    <script>
+        // Retrieve donor data from sessionStorage and populate the table
+        const donorData = JSON.parse(sessionStorage.getItem('donorData')) || [];
+        const donorTableBody = document.querySelector('#donorTable tbody');
+
+        donorData.forEach(donor => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${donor.donorId}</td>
+                <td>${donor.firstname}</td>
+                <td>${donor.lastname}</td>
+                <td>${donor.blood}</td>
+                <td>${donor.dob}</td>
+                <td>${donor.address}</td>
+                <td>${donor.contact}</td>
+            `;
+            donorTableBody.appendChild(row);
+        });
+    </script>
+</body>
+</html>
