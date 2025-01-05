@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        /* Global reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('image2.avif'); /* Add the background image here */
+            background-size: cover; /* Ensure the background image covers the entire body */
+            background-position: center; /* Center the background image */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.8); /* Light transparent background to make text readable */
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 500%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        button, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            background-color: #e74c3c; /* Set button background color */
+            color: white; /* Set button text color to white */
+        }
+
+        button:hover {
+            background-color: #c0392b; /* Darken the button on hover */
+        }
+
+        .dropdown-container {
+            position: relative;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+
+        <!-- Buttons to route to different pages -->
+        <button onclick="window.location.href='/add-blood-requirement'">Add Blood Requirement</button>
+        <button onclick="window.location.href='/add-hospital'">Add Hospital</button>
+        <button onclick="window.location.href='/add-patient'">Add Patient</button>
+
+        <!-- Dropdown for blood group selection -->
+        <div class="dropdown-container">
+            <label for="bloodGroup">Donor By Blood Group</label>
+            <select id="bloodGroup">
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+            </select>
+            <button onclick="viewDonors()">View Donors</button>
+        </div>
+
+    </div>
+
+    <script>
+        // Function to handle "View Donors" button click and pass blood group to the API via GET
+        function viewDonors() {
+            const bloodGroup = document.getElementById('bloodGroup').value;
+            const apiUrl = `/view-donors/${bloodGroup}`;
+
+            // Fetch data from API with selected blood group
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the response, e.g., displaying the list of donors
+                    console.log(data);
+                    // You can redirect to a new page if needed or display data in the current page
+                    alert('Donors fetched successfully.');
+                })
+                .catch(error => {
+                    console.error('Error fetching donors:', error);
+                    alert('Error fetching donors.');
+                });
+        }
+    </script>
+
+</body>
+</html>

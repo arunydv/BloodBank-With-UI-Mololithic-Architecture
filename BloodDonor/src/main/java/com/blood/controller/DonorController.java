@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.blood.model.BloodDonation;
 import com.blood.model.Donor;
@@ -20,7 +21,7 @@ import com.blood.model.Hospital;
 import com.blood.model.Patient;
 import com.blood.service.DonorService;
 
-@Controller
+@RestController
 public class DonorController {
 
 	@Autowired

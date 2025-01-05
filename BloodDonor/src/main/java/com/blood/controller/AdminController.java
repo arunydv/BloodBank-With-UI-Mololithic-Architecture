@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.blood.model.Admin;
 import com.blood.model.BloodRequirement;
@@ -20,7 +21,7 @@ import com.blood.model.Hospital;
 import com.blood.model.Patient;
 import com.blood.service.AdminService;
 
-@Controller
+@RestController
 public class AdminController {
 
 	@Autowired
@@ -35,7 +36,7 @@ public class AdminController {
 	        response.put("status", "success");
 	        response.put("message", "Login successful!");
 	        // Optionally, you can add a redirect URL here if you want the frontend to redirect after login
-	        response.put("redirect", "/"); // Replace with the actual dashboard URL
+	        response.put("redirect", "admindashboard.html"); // Replace with the actual dashboard URL
 	        return ResponseEntity.ok(response);
 	    } else {
 	        response.put("status", "error");
