@@ -12,9 +12,9 @@ public class Hospital {
 	@Id
 	@Column(length = 10)
 	private String hospId;
-	@Column(length = 10,nullable = false)
+	@Column(length = 25,nullable = false)
 	private String name;
-	@Column(length = 10,nullable = false)
+	@Column(length = 25,nullable = false)
 	private String address;
 	public String getHospId() {
 		return hospId;
