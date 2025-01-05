@@ -59,7 +59,7 @@ public class DonorController {
 		if (valid) {
 			response.put("status", "success");
 			response.put("message", "Login successful!");
-			response.put("redirect", "/"); 
+			response.put("redirect", "/donordashboard.html"); 
 			return ResponseEntity.ok(response);
 		} else {
 			response.put("status", "error");

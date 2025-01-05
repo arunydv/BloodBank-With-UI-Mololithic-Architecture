@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Patients</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        table {
+            width: 90%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .back-btn:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <h1>View Patients</h1>
+
+    <table id="patientsTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Blood Group</th>
+                <th>Admission Date</th>
+                <th>Discharge Date</th>
+                <th>Age</th>
+                <th>Address</th>
+                <th>Date of Birth</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Patient data will be injected here -->
+        </tbody>
+    </table>
+
+    <button class="back-btn" onclick="window.location.href='donordashboard.html'">Back to Dashboard</button>
+
+    <script>
+        // Fetch the patients data from sessionStorage
+        const patientsData = JSON.parse(sessionStorage.getItem("patientsData"));
+        
+        if (patientsData) {
+            const tableBody = document.querySelector("#patientsTable tbody");
+            
+            // Populate the table with patient data
+            patientsData.forEach(patient => {
+                const row = document.createElement("tr");
+                
+                row.innerHTML = `
+                    <td>${patient.id}</td>
+                    <td>${patient.name}</td>
+                    <td>${patient.bloodgroup}</td>
+                    <td>${patient.admission}</td>
+                    <td>${patient.discharge}</td>
+                    <td>${patient.age}</td>
+                    <td>${patient.address}</td>
+                    <td>${patient.dob}</td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+        } else {
+            alert("No patient data found!");
+        }
+    </script>
+</body>
+</html>
